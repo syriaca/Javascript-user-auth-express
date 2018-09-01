@@ -66,3 +66,4 @@ Temporary Items
 
 # vim temp files
 *.swp
+package-lock.json
