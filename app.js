@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require ('express-session');
+var MongoStore = require ('connect-mongo')(session);
 var app = express();
 
 // MongoDB connection
@@ -15,7 +16,10 @@ db.on('error', console.error.bind(console, 'connection error:'))
 app.use(session({
   secret: 'treehouse loves you',
   resave: true,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
 }));
 
 // make user ID available in templates
