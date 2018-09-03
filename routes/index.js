@@ -4,7 +4,7 @@ var User = require('../models/user');
 var mid = require ('../middleware');
 
 // GET /profile
-router.get('/profile', function(req, res, next){
+router.get('/profile', mid.requireLogin, function(req, res, next){
     if(!req.session.userId) {
       var err = new Error('You are not authorized to view this page.');
       err.status = 403;
